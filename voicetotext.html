@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <title>Voice to Text</title>
   </head>
   <body>
@@ -14,7 +16,7 @@
       placeholder="Speak something..."
     ></textarea>
     <br />
-    <button onclick="startDictation()">🎤 Start Voice Input</button>
+    <button>🎤 Start Voice Input</button>
 
     <script>
       function startDictation() {
@@ -51,6 +53,12 @@
           );
         }
       }
+
+      document.querySelector("button").addEventListener("click", function () {
+        setTimeout(() => {
+          startDictation();
+        }, 500); // Small delay
+      });
     </script>
   </body>
 </html>
