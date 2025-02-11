@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Voice to Text</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <h2>Voice to Text</h2>
-    <textarea id="textbox" rows="5" cols="50" placeholder="Speak something..."></textarea>
-    <br>
+    <textarea
+      id="textbox"
+      rows="5"
+      cols="50"
+      placeholder="Speak something..."
+    ></textarea>
+    <br />
     <button onclick="startDictation()">🎤 Start Voice Input</button>
 
     <script>
-        function startDictation() {
-            if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-                const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-                recognition.lang = 'ta-IN';
-                recognition.continuous = false;
-                recognition.interimResults = false;
+      function startDictation() {
+        if (
+          "SpeechRecognition" in window ||
+          "webkitSpeechRecognition" in window
+        ) {
+          const recognition = new (window.SpeechRecognition ||
+            window.webkitSpeechRecognition)();
+          recognition.lang = "ta-IN";
+          recognition.continuous = false;
+          recognition.interimResults = false;
 
-                recognition.onstart = function() {
-                    console.log('Voice recognition started...');
-                };
+          recognition.onstart = function () {
+            console.log("Voice recognition started...");
+          };
 
-                recognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript;
-                    document.getElementById('textbox').value = transcript;
-                };
+          recognition.onresult = function (event) {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById("textbox").value = transcript;
+          };
 
-                recognition.onerror = function(event) {
-                    console.error('Error occurred in recognition: ', event.error);
-                };
+          recognition.onerror = function (event) {
+            console.error("Error occurred in recognition: ", event.error);
+            alert("Error: " + event.error);
+          };
 
-                recognition.start();
-            } else {
-                alert('Speech Recognition is not supported in this browser. Please use Google Chrome or Edge.');
-            }
+          setTimeout(() => {
+            recognition.start();
+          }, 500); // Small delay to ensure it's not blocked
+        } else {
+          alert(
+            "Speech Recognition is not supported in this browser. Please use Google Chrome on Android."
+          );
         }
+      }
     </script>
-
-</body>
+  </body>
 </html>
